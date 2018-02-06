@@ -1,0 +1,59 @@
+server:
+  port: 80
+
+spring:
+  datasource:
+     type: com.zaxxer.hikari.HikariDataSource
+     url: jdbc:mysql://localhost:3306/security?useUnicode=true&characterEncoding=utf8&useSSL=false
+     username: root
+     password: root
+     driver-class-name: com.mysql.jdbc.Driver
+     platform: mysql
+     #schema: classpath:schema.sql
+     #data: classpath:data.sql
+     hikari:
+       data-source-properties:
+         cachePrepStmts: true
+         prepStmtCacheSize: 250
+         prepStmtCacheSqlLimit: 2048
+         useServerPrepStmts: true
+  session:
+    store-type: none #配置集群的spring-session存储
+  redis:
+    password: shiyuesoft
+
+logging:
+  level:
+    com.duke: DEBUG
+    org.springframework: DEBUG
+  file: ./logs/demo.log
+
+debug: true
+
+security:
+#  user:
+#    password: duke.password
+#    name: duke
+  basic:
+    enabled: true
+
+com:
+  duke:
+    security:
+      code:
+        imageCode:
+          length: 4
+          url: /user,/user/*
+      browser:
+        loginPage: /demo_login.html
+        registPage: /demo_regist.html
+      social:
+        filterProcessesUrl: /login
+        qq:
+          app-id: 101386962
+          app-secret: 2a0f820407df400b84a854d054be8b6a
+          providerId: qq
+        weixin:
+          app-id: wxfd6965ab1fc6adb2
+          app-secret: 66bb4566de776ac699ec1dbed0cc3dd1
+          providerId: weixin
